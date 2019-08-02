@@ -1,0 +1,125 @@
+package org.cool.msg;
+
+import org.cool.msg.interceptor.*;
+import org.cool.msg.model.Message;
+import org.cool.msg.enums.MsgChannel;
+import org.cool.msg.exception.MsgException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+@Slf4j
+@Component
+public class MsgServiceImpl implements MsgService {
+
+    private final MsgPreValidatorHandlerInterceptor preValidatorHandlerInterceptor;
+
+    private final MsgExceptionHandlerInterceptor exceptionHandlerInterceptor;
+
+    private final ApplicationContext applicationContext;
+
+    @Autowired
+    public MsgServiceImpl(ApplicationContext applicationContext, MsgPreValidatorHandlerInterceptor preValidatorHandlerInterceptor, MsgExceptionHandlerInterceptor exceptionHandlerInterceptor) {
+        this.applicationContext = applicationContext;
+        this.preValidatorHandlerInterceptor = preValidatorHandlerInterceptor;
+        this.exceptionHandlerInterceptor = exceptionHandlerInterceptor;
+    }
+
+    @Override
+    public void initial(List<String> receiver, String title, MsgChannel channel, String templateName, Map<String, Serializable> context) {
+        Message message = new Message();
+        message.setReceiver(receiver).setTitle(title).setChannel(channel.value()).setTemplateName(templateName)
+                .setContext(context).setStatus(Message.Status.Initial.value());
+        send(message);
+    }
+
+    @Override
+    public void initial(List<String> receiver, String title, MsgChannel channel, String content) {
+        Message message = new Message();
+        message.setReceiver(receiver).setTitle(title).setChannel(channel.value()).setContent(content)
+                .setStatus(Message.Status.Initial.value());
+        send(message);
+    }
+
+    @Override
+    public void send(Message message) {
+
+        MsgChannel msgChannel = MsgChannel.from(message.getChannel());
+        try {
+            preValidatorHandlerInterceptor.check(message);
+
+            Map<String, MsgValidatorHandlerInterceptor> messageValidatorMap = applicationContext.getBeansOfType(MsgValidatorHandlerInterceptor.class);
+            if (!CollectionUtils.isEmpty(messageValidatorMap)) {
+                messageValidatorMap.values().forEach(messageValidator -> {
+                    if (Objects.equals(messageValidator.getMsgChannel(), msgChannel)) {
+                        messageValidator.check(message);
+                    }
+                });
+            }
+
+            if (StringUtils.hasText(message.getTemplateName())) {
+                Map<String, MsgTemplateHandlerInterceptor> msgTemplateHandlerInterceptorMap = applicationContext.getBeansOfType(MsgTemplateHandlerInterceptor.class);
+                if (!CollectionUtils.isEmpty(msgTemplateHandlerInterceptorMap)) {
+                    msgTemplateHandlerInterceptorMap.values().forEach(msgTemplateHandlerInterceptor -> {
+                        if (Objects.equals(msgTemplateHandlerInterceptor.getMsgChannel(), msgChannel)) {
+                            msgTemplateHandlerInterceptor.applyTemplate(message);
+                        }
+                    });
+                }
+            }
+
+            Map<String, MsgHandlerInterceptor> msgHandlerInterceptorMap = applicationContext.getBeansOfType(MsgHandlerInterceptor.class);
+            if (!CollectionUtils.isEmpty(msgHandlerInterceptorMap)) {
+                msgHandlerInterceptorMap.values().forEach(msgHandlerInterceptor -> {
+                    if (Objects.equals(msgHandlerInterceptor.getMsgChannel(), msgChannel)) {
+                        msgHandlerInterceptor.preHandler(message);
+                    }
+                });
+            }
+            doSendMessage(message, msgChannel);
+        } catch (Exception e){
+            exceptionHandlerInterceptor.whenError(message);
+            return;
+        }
+    }
+
+    private void doSendMessage(Message message, MsgChannel msgChannel) {
+
+        StringBuilder sbFail = new StringBuilder();
+        Boolean flag = true;
+
+        Map<String, MsgSendService> msgServiceMap = applicationContext.getBeansOfType(MsgSendService.class);
+        if (!CollectionUtils.isEmpty(msgServiceMap)) {
+            for(MsgSendService msgSendService : msgServiceMap.values()){
+                if (Objects.equals(msgSendService.getMsgChannel(), msgChannel)) {
+                    try {
+                        msgSendService.send(message);
+                    } catch (Exception e) {
+                        String error = e.getMessage();
+                        sbFail.append(error).append("\n");
+                        flag = false;
+                    }
+
+                }
+            }
+        }
+        String failResult = sbFail.toString().trim();
+        if (flag) {
+            message.setStatus(Message.Status.SendSuccess.value());
+        } else {
+            message.setStatus(Message.Status.SendFailed.value()).setFailReason(failResult);
+        }
+
+        if (!flag) {
+            throw new MsgException(failResult);
+        }
+    }
+}
