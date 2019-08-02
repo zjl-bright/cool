@@ -22,15 +22,12 @@ public class MsgServiceImpl implements MsgService {
 
     private final MsgPreValidatorHandlerInterceptor preValidatorHandlerInterceptor;
 
-    private final MsgExceptionHandlerInterceptor exceptionHandlerInterceptor;
-
     private final ApplicationContext applicationContext;
 
     @Autowired
-    public MsgServiceImpl(ApplicationContext applicationContext, MsgPreValidatorHandlerInterceptor preValidatorHandlerInterceptor, MsgExceptionHandlerInterceptor exceptionHandlerInterceptor) {
+    public MsgServiceImpl(ApplicationContext applicationContext, MsgPreValidatorHandlerInterceptor preValidatorHandlerInterceptor) {
         this.applicationContext = applicationContext;
         this.preValidatorHandlerInterceptor = preValidatorHandlerInterceptor;
-        this.exceptionHandlerInterceptor = exceptionHandlerInterceptor;
     }
 
     @Override
@@ -86,7 +83,10 @@ public class MsgServiceImpl implements MsgService {
             }
             doSendMessage(message, msgChannel);
         } catch (Exception e){
-            exceptionHandlerInterceptor.whenError(message);
+            MsgExceptionHandlerInterceptor exceptionHandlerInterceptor = applicationContext.getBean(MsgExceptionHandlerInterceptor.class);
+            if (Objects.nonNull(exceptionHandlerInterceptor)) {
+                exceptionHandlerInterceptor.whenError(message);
+            }
             return;
         }
     }
