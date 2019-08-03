@@ -18,10 +18,10 @@ public class EncryptUtil {
     private static final HashFunction SHA512 = Hashing.sha512();
     private static final Splitter SPLITTER = Splitter.on('@').trimResults();
     private static final Joiner JOINER = Joiner.on('@').skipNulls();
-    private static final HashFunction MD5 = Hashing.goodFastHash(12);
+    private static final HashFunction FASTHASH = Hashing.goodFastHash(12);
 
     public static String encrypt(String password) {
-        String salt = MD5.newHasher().putString(UUID.randomUUID().toString(), Charsets.UTF_8).putLong(System.currentTimeMillis()).hash().toString().substring(0, 4);
+        String salt = FASTHASH.newHasher().putString(UUID.randomUUID().toString(), Charsets.UTF_8).putLong(System.currentTimeMillis()).hash().toString().substring(0, 4);
         String realPassword = SHA512.hashString(password + salt, Charsets.UTF_8).toString().substring(0, 20);
         return JOINER.join(salt, realPassword, new Object[0]);
     }
@@ -31,5 +31,10 @@ public class EncryptUtil {
         String salt = Iterables.get(parts, 0);
         String realPassword = Iterables.get(parts, 1);
         return Objects.equal(SHA512.hashString(password + salt, Charsets.UTF_8).toString().substring(0, 20), realPassword);
+    }
+
+    public static String uuid() {
+        String uuid = UUID.randomUUID().toString();
+        return uuid.replace("-", "");
     }
 }
