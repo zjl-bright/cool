@@ -10,6 +10,9 @@ import com.google.common.hash.Hashing;
 
 import java.util.UUID;
 
+/**
+ * 不可逆加密
+ */
 public class EncryptUtil {
 
     private static final HashFunction SHA512 = Hashing.sha512();
