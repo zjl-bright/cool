@@ -196,18 +196,18 @@ public class AESUtil {
 //        return deadline;
 //    }
 
-    public static void main(String[] args) throws Exception{
-        //密钥 加密内容(对象序列化后的内容-json格式字符串)
-        String key="123456";
-        String code = "815148382@qq.com";
-        System.out.println(String.format("明文是：%s, 秘钥是: %s",code, key));
-
-        String encryptRes=getEncryptionCode(code,key);
-        System.out.println(String.format("加密结果：%s ",encryptRes));
-
-        String decryptRes=getDecryptionCode(encryptRes,key);
-        System.out.println(String.format("解密结果：%s ",decryptRes));
-    }
+//    public static void main(String[] args) throws Exception{
+//        //密钥 加密内容(对象序列化后的内容-json格式字符串)
+//        String key="123456";
+//        String code = "815148382@qq.com";
+//        System.out.println(String.format("明文是：%s, 秘钥是: %s",code, key));
+//
+//        String encryptRes=getEncryptionCode(code,key);
+//        System.out.println(String.format("加密结果：%s ",encryptRes));
+//
+//        String decryptRes=getDecryptionCode(encryptRes,key);
+//        System.out.println(String.format("解密结果：%s ",decryptRes));
+//    }
 
     public static String makeRandomPassword(){
         char charr[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray();

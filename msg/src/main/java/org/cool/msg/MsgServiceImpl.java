@@ -17,14 +17,12 @@ import java.util.Map;
 import java.util.Objects;
 
 @Slf4j
-@Component
 public class MsgServiceImpl implements MsgService {
 
     private final MsgPreValidatorHandlerInterceptor preValidatorHandlerInterceptor;
 
     private final ApplicationContext applicationContext;
 
-    @Autowired
     public MsgServiceImpl(ApplicationContext applicationContext, MsgPreValidatorHandlerInterceptor preValidatorHandlerInterceptor) {
         this.applicationContext = applicationContext;
         this.preValidatorHandlerInterceptor = preValidatorHandlerInterceptor;
