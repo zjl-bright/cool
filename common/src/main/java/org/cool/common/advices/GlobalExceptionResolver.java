@@ -7,6 +7,7 @@ import org.cool.common.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,7 +31,11 @@ public class GlobalExceptionResolver {
     @ExceptionHandler(value = {ServiceException.class})
     @ResponseBody
     public Response ServiceExceptionHandler(ServiceException e){
-        log.error("ServiceException happened, cause by : {}", Throwables.getStackTraceAsString(e));
+        if(StringUtils.hasText(e.getParam())){
+            log.error("ServiceException happened, param : {}, cause by : {}", e.getParam(), Throwables.getStackTraceAsString(e));
+        }else{
+            log.error("ServiceException happened, cause by : {}", Throwables.getStackTraceAsString(e));
+        }
         Locale locale = new Locale("zh", "CN");
         String message = messageSource.getMessage(e.getMessage(), null, e.getMessage(), locale);
         return Response.fail(message);
