@@ -26,7 +26,7 @@ public class GlobalExceptionResolver {
         this.messageSource = messageSource;
     }
 
-    //拦截已知的业务异常, 打印日志, 200返回, 发送response对象
+    //拦截主动抛出的已知异常, 打印日志, 200返回, 发送response对象
     @ExceptionHandler(value = {ServiceException.class})
     @ResponseBody
     public Response ServiceExceptionHandler(ServiceException e){

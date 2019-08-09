@@ -12,6 +12,10 @@ public class ServiceException extends RuntimeException {
 
     private int status = 500;
 
+    public ServiceException(String message) {
+        super(message);
+    }
+
     public ServiceException(String message, Throwable cause) {
         super(message, cause);
     }
