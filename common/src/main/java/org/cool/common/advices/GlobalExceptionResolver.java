@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Locale;
+import java.util.Objects;
 
 @Slf4j
 @ControllerAdvice
@@ -31,8 +33,8 @@ public class GlobalExceptionResolver {
     @ExceptionHandler(value = {ServiceException.class})
     @ResponseBody
     public Response ServiceExceptionHandler(ServiceException e){
-        if(StringUtils.hasText(e.getParam())){
-            log.error("ServiceException happened, param : {}, cause by : {}", e.getParam(), Throwables.getStackTraceAsString(e));
+        if(Objects.nonNull(e.getParams())){
+            log.error("ServiceException happened, param : {}, cause by : {}", String.join(",", e.getParams()), Throwables.getStackTraceAsString(e));
         }else{
             log.error("ServiceException happened, cause by : {}", Throwables.getStackTraceAsString(e));
         }

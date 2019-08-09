@@ -12,24 +12,24 @@ public class ServiceException extends RuntimeException {
 
     private int status = 500;
 
-    private String param;
+    private String[] params;
 
     public ServiceException(String message) {
         super(message);
     }
 
-    public ServiceException(String param, String message) {
+    public ServiceException(String message, String... params) {
         super(message);
-        this.param = param;
+        this.params = params;
     }
 
     public ServiceException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public ServiceException(String param, String message, Throwable cause) {
+    public ServiceException(String message, Throwable cause, String... params) {
         super(message, cause);
-        this.param = param;
+        this.params = params;
     }
 
     public ServiceException(int status, String message, Throwable cause) {
@@ -37,13 +37,13 @@ public class ServiceException extends RuntimeException {
         this.status = status;
     }
 
-    public ServiceException(String param, int status, String message, Throwable cause) {
+    public ServiceException(int status, String message, Throwable cause, String... params) {
         super(message, cause);
         this.status = status;
-        this.param = param;
+        this.params = params;
     }
 
-    public String getParam(){
-        return param;
+    public String[] getParams(){
+        return params;
     }
 }
