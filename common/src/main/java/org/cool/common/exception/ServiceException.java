@@ -2,6 +2,8 @@ package org.cool.common.exception;
 
 import lombok.Data;
 
+import java.util.Arrays;
+
 /**
  * @Auther: zhaojl@hshbao.com
  * @Date: 2018/11/27

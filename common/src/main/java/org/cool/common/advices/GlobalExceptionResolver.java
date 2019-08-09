@@ -34,7 +34,7 @@ public class GlobalExceptionResolver {
     @ResponseBody
     public Response ServiceExceptionHandler(ServiceException e){
         if(Objects.nonNull(e.getParams())){
-            log.error("ServiceException happened, param : {}, cause by : {}", String.join(",", e.getParams()), Throwables.getStackTraceAsString(e));
+            log.error("ServiceException happened, params : {}, cause by : {}", String.join(",", e.getParams()), Throwables.getStackTraceAsString(e));
         }else{
             log.error("ServiceException happened, cause by : {}", Throwables.getStackTraceAsString(e));
         }
