@@ -20,8 +20,8 @@ public class FreemarkerTemplateMsgHandler implements MsgTemplateHandlerIntercept
     private Configuration configuration;
 
     @Override
-    public MsgChannel getMsgChannel(){
-        return MsgChannel.Email;
+    public String getSuffix(){
+        return ".ftl";
     }
 
     @Override

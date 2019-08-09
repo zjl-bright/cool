@@ -6,7 +6,7 @@ import org.cool.msg.exception.MsgException;
 
 public interface MsgTemplateHandlerInterceptor {
 
-    MsgChannel getMsgChannel();
+    String getSuffix();
 
     Message applyTemplate(Message message) throws MsgException;
 }

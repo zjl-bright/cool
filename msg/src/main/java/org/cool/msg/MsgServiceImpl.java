@@ -1,5 +1,6 @@
 package org.cool.msg;
 
+import freemarker.template.utility.StringUtil;
 import org.cool.msg.interceptor.*;
 import org.cool.msg.model.Message;
 import org.cool.msg.enums.MsgChannel;
@@ -64,7 +65,7 @@ public class MsgServiceImpl implements MsgService {
                 Map<String, MsgTemplateHandlerInterceptor> msgTemplateHandlerInterceptorMap = applicationContext.getBeansOfType(MsgTemplateHandlerInterceptor.class);
                 if (!CollectionUtils.isEmpty(msgTemplateHandlerInterceptorMap)) {
                     msgTemplateHandlerInterceptorMap.values().forEach(msgTemplateHandlerInterceptor -> {
-                        if (Objects.equals(msgTemplateHandlerInterceptor.getMsgChannel(), msgChannel)) {
+                        if ( message.getTemplateName().contains(msgTemplateHandlerInterceptor.getSuffix())) {
                             msgTemplateHandlerInterceptor.applyTemplate(message);
                         }
                     });
