@@ -26,7 +26,7 @@ public class RespHelper {
         if (resp.isSuccess()) {
             return resp.getResult();
         } else {
-            throw new ServiceException(resp.getError(), new RuntimeException());
+            throw new ServiceException(resp.getError());
         }
     }
 
