@@ -13,6 +13,7 @@ import java.util.Objects;
 @Accessors(chain = true)
 public class Message implements Serializable {
 
+    private String sender;
 
     private List<String> receiver;
 
@@ -24,7 +25,7 @@ public class Message implements Serializable {
 
     private String templateName;
 
-    private Map<String, Serializable> context;
+    private Map<String, String> context;
 
     private String failReason;
 
