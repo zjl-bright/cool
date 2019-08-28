@@ -13,8 +13,6 @@ import java.util.Objects;
 @Accessors(chain = true)
 public class Message implements Serializable {
 
-    private String sender;
-
     private List<String> receiver;
 
     private String title;
