@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
+import java.io.Serializable;
+import java.util.Map;
+
 @Slf4j
 @Component
 public class FreemarkerTemplateMsgHandler implements MsgTemplateHandlerInterceptor {
@@ -25,14 +28,13 @@ public class FreemarkerTemplateMsgHandler implements MsgTemplateHandlerIntercept
     }
 
     @Override
-    public Message applyTemplate(Message message){
+    public String applyTemplate(String templateName, Map<String, Serializable> context){
         try{
-            Template template = configuration.getTemplate(message.getTemplateName());
-            String content = FreeMarkerTemplateUtils.processTemplateIntoString(template, message.getContext());
-            message.setContent(content);
-            return message;
+            Template template = configuration.getTemplate(templateName);
+            String content = FreeMarkerTemplateUtils.processTemplateIntoString(template, context);
+            return content;
         } catch (Exception e){
-            log.error("FreeMarker template fail, template={}, cause={}", message.getTemplateName(), Throwables.getStackTraceAsString(e));
+            log.error("FreeMarker template fail, template={}, cause={}", templateName, Throwables.getStackTraceAsString(e));
             throw new MsgException(e);
         }
     }

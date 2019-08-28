@@ -23,7 +23,7 @@ public class PreValidatorHandlerInterceptor implements MsgPreValidatorHandlerInt
 
             throw new MsgException("message.receiver.required");
 
-        } else if (!StringUtils.hasText(message.getTemplateName()) && !StringUtils.hasText(message.getContent())) {
+        } else if (!StringUtils.hasText(message.getContent())) {
 
             throw new MsgException("message.template.or.content.required.one");
         }

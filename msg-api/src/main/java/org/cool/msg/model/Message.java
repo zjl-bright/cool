@@ -21,10 +21,6 @@ public class Message implements Serializable {
 
     private Integer channel;
 
-    private String templateName;
-
-    private Map<String, Serializable> context;
-
     private String failReason;
 
     /**
@@ -35,7 +31,7 @@ public class Message implements Serializable {
     /**
      * 消息发送时间
      */
-    private LocalDateTime createTime;
+    private LocalDateTime eventCreateTime;
 
     public enum Status {
         Initial(0, "开始消费消息"),

@@ -34,17 +34,26 @@ public class MsgServiceImpl implements MsgService {
     @Override
     public void initial(List<String> receiver, String title, MsgChannel channel, String templateName, Map<String, Serializable> context) {
         Message message = new Message();
-        message.setReceiver(receiver).setTitle(title).setChannel(channel.value())
-                .setTemplateName(templateName).setContext(context).setStatus(Message.Status.Initial.value());
+        if (StringUtils.hasText(templateName)) {
+            Map<String, MsgTemplateHandlerInterceptor> msgTemplateHandlerInterceptorMap = applicationContext.getBeansOfType(MsgTemplateHandlerInterceptor.class);
+            if (!CollectionUtils.isEmpty(msgTemplateHandlerInterceptorMap)) {
+                msgTemplateHandlerInterceptorMap.values().forEach(msgTemplateHandlerInterceptor -> {
+                    if ( templateName.contains(msgTemplateHandlerInterceptor.getSuffix())) {
+                        message.setContent(msgTemplateHandlerInterceptor.applyTemplate(templateName, context));
+                    }
+                });
+            }
+        }
+        message.setReceiver(receiver).setTitle(title).setChannel(channel.value()).setStatus(Message.Status.Initial.value());
         send(message);
     }
 
     @Override
     public void initial(List<String> receiver, String title, MsgChannel channel, String templateContent, Map<String, Serializable> context, LocalDateTime createTime) {
-        String content = TemplateUtil.render(templateContent, context);
         Message message = new Message();
+        String content = TemplateUtil.render(templateContent, context);
         message.setReceiver(receiver).setTitle(title).setChannel(channel.value()).setContent(content)
-                .setCreateTime(createTime).setStatus(Message.Status.Initial.value());
+                .setEventCreateTime(createTime).setStatus(Message.Status.Initial.value());
         send(message);
     }
 
@@ -64,16 +73,7 @@ public class MsgServiceImpl implements MsgService {
                 });
             }
 
-            if (StringUtils.hasText(message.getTemplateName())) {
-                Map<String, MsgTemplateHandlerInterceptor> msgTemplateHandlerInterceptorMap = applicationContext.getBeansOfType(MsgTemplateHandlerInterceptor.class);
-                if (!CollectionUtils.isEmpty(msgTemplateHandlerInterceptorMap)) {
-                    msgTemplateHandlerInterceptorMap.values().forEach(msgTemplateHandlerInterceptor -> {
-                        if ( message.getTemplateName().contains(msgTemplateHandlerInterceptor.getSuffix())) {
-                            msgTemplateHandlerInterceptor.applyTemplate(message);
-                        }
-                    });
-                }
-            }
+
 
             Map<String, MsgHandlerInterceptor> msgHandlerInterceptorMap = applicationContext.getBeansOfType(MsgHandlerInterceptor.class);
             if (!CollectionUtils.isEmpty(msgHandlerInterceptorMap)) {
