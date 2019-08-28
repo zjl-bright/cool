@@ -31,18 +31,18 @@ public class MsgServiceImpl implements MsgService {
     }
 
     @Override
-    public void initial(String sender, List<String> receiver, String title, MsgChannel channel, String templateName, Map<String, Serializable> context, boolean flag) {
+    public void initial(List<String> receiver, String title, MsgChannel channel, String templateName, Map<String, Serializable> context, boolean flag) {
         Message message = new Message();
-        message.setSender(sender).setReceiver(receiver).setTitle(title).setChannel(channel.value())
+        message.setReceiver(receiver).setTitle(title).setChannel(channel.value())
                 .setTemplateName(templateName).setContext(context).setStatus(Message.Status.Initial.value());
         send(message);
     }
 
     @Override
-    public void initial(String sender, List<String> receiver, String title, MsgChannel channel, String templateContent, Map<String, Serializable> context) {
+    public void initial(List<String> receiver, String title, MsgChannel channel, String templateContent, Map<String, Serializable> context) {
         String content = TemplateUtil.render(templateContent, context);
         Message message = new Message();
-        message.setSender(sender).setReceiver(receiver).setTitle(title).setChannel(channel.value())
+        message.setReceiver(receiver).setTitle(title).setChannel(channel.value())
                 .setContent(content).setStatus(Message.Status.Initial.value());
         send(message);
     }
