@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -31,7 +32,7 @@ public class MsgServiceImpl implements MsgService {
     }
 
     @Override
-    public void initial(List<String> receiver, String title, MsgChannel channel, String templateName, Map<String, Serializable> context, boolean flag) {
+    public void initial(List<String> receiver, String title, MsgChannel channel, String templateName, Map<String, Serializable> context) {
         Message message = new Message();
         message.setReceiver(receiver).setTitle(title).setChannel(channel.value())
                 .setTemplateName(templateName).setContext(context).setStatus(Message.Status.Initial.value());
@@ -39,11 +40,11 @@ public class MsgServiceImpl implements MsgService {
     }
 
     @Override
-    public void initial(List<String> receiver, String title, MsgChannel channel, String templateContent, Map<String, Serializable> context) {
+    public void initial(List<String> receiver, String title, MsgChannel channel, String templateContent, Map<String, Serializable> context, LocalDateTime createTime) {
         String content = TemplateUtil.render(templateContent, context);
         Message message = new Message();
-        message.setReceiver(receiver).setTitle(title).setChannel(channel.value())
-                .setContent(content).setStatus(Message.Status.Initial.value());
+        message.setReceiver(receiver).setTitle(title).setChannel(channel.value()).setContent(content)
+                .setCreateTime(createTime).setStatus(Message.Status.Initial.value());
         send(message);
     }
 
