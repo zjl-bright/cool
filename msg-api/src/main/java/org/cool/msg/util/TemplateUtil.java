@@ -2,6 +2,7 @@ package org.cool.msg.util;
 
 import com.google.common.base.Strings;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,12 +17,12 @@ public class TemplateUtil {
      * @param context
      * @return
      */
-    public static String render(String template, Map<String, String> context) {
+    public static String render(String template, Map<String, Serializable> context) {
         Pattern pattern = Pattern.compile(REGEX);
         Matcher matcher = pattern.matcher(template);
         while (matcher.find()) {
             String key = matcher.group();
-            String value = context.get(trim(key));
+            String value = context.get(trim(key)).toString();
             if (value != null) {
                 template = template.replace(key, value);
             }

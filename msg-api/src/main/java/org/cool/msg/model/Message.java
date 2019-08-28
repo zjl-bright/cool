@@ -25,7 +25,7 @@ public class Message implements Serializable {
 
     private String templateName;
 
-    private Map<String, String> context;
+    private Map<String, Serializable> context;
 
     private String failReason;
 

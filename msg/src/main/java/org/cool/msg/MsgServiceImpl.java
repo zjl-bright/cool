@@ -31,7 +31,7 @@ public class MsgServiceImpl implements MsgService {
     }
 
     @Override
-    public void initial(String sender, List<String> receiver, String title, MsgChannel channel, String templateName, Map<String, String> context, boolean flag) {
+    public void initial(String sender, List<String> receiver, String title, MsgChannel channel, String templateName, Map<String, Serializable> context, boolean flag) {
         Message message = new Message();
         message.setSender(sender).setReceiver(receiver).setTitle(title).setChannel(channel.value())
                 .setTemplateName(templateName).setContext(context).setStatus(Message.Status.Initial.value());
@@ -39,7 +39,7 @@ public class MsgServiceImpl implements MsgService {
     }
 
     @Override
-    public void initial(String sender, List<String> receiver, String title, MsgChannel channel, String templateContent, Map<String, String> context) {
+    public void initial(String sender, List<String> receiver, String title, MsgChannel channel, String templateContent, Map<String, Serializable> context) {
         String content = TemplateUtil.render(templateContent, context);
         Message message = new Message();
         message.setSender(sender).setReceiver(receiver).setTitle(title).setChannel(channel.value())
