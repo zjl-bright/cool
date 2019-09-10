@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
 package org.cool.util;
 
 import com.google.common.base.Splitter;
@@ -6,12 +9,6 @@ import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * @Auther: zhaojl@hshbao.com
- * @Date: 2018/11/16
- * @Description:
- * @Version: 1.0
- */
 public class Splitters {
     public static final Splitter DOT = Splitter.on(".").omitEmptyStrings().trimResults();
     public static final Splitter COMMA = Splitter.on(",").omitEmptyStrings().trimResults();

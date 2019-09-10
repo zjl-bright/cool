@@ -1,4 +1,8 @@
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
 package org.cool.util;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;

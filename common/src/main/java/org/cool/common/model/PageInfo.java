@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
 package org.cool.common.model;
 
 import com.google.common.base.MoreObjects;
@@ -6,12 +9,6 @@ import com.google.common.collect.Maps;
 
 import java.util.Map;
 
-/**
- * @Auther: zhaojl@hshbao.com
- * @Date: 2018/11/16
- * @Description:
- * @Version: 1.0
- */
 public class PageInfo {
     public static final String LIMIT = "limit";
     public static final String OFFSET = "offset";

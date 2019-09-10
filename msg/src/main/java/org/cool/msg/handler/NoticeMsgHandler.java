@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
 //package org.cool.msg.handler;
 //
 //import org.cool.msg.model.Message;

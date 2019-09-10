@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
 package org.cool.common.advices;
 
 import com.google.common.base.Throwables;
@@ -7,14 +10,12 @@ import org.cool.common.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Objects;
 

@@ -1,16 +1,12 @@
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
 package org.cool.common.model;
 
 import com.google.common.base.MoreObjects;
 import lombok.Data;
-
 import java.io.Serializable;
 
-/**
- * @Auther: zhaojl@hshbao.com
- * @Date: 2018/10/18
- * @Description:
- * @Version: 1.0
- */
 @Data
 public class Response<T> implements Serializable {
 

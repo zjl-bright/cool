@@ -1,13 +1,14 @@
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
 package org.cool.msg.handler.template;
 
 import com.google.common.base.Throwables;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
-import org.cool.msg.enums.MsgChannel;
 import org.cool.msg.exception.MsgException;
 import org.cool.msg.interceptor.MsgTemplateHandlerInterceptor;
-import org.cool.msg.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;

@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
 //package org.cool.common.model;
 //
 //import com.baomidou.mybatisplus.annotation.FieldFill;
@@ -9,13 +12,7 @@
 //import lombok.experimental.Accessors;
 //
 //import java.time.LocalDateTime;
-//
-///**
-// * @Auther: zhaojl@hshbao.com
-// * @Date: 2018/12/18
-// * @Description:
-// * @Version: 1.0
-// */
+
 //@Data
 //@Accessors(chain = true)
 //public class BaseEntity implements BaseUser {

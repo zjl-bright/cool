@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
 package org.cool.msg.exception;
 
 public class MsgException extends RuntimeException{

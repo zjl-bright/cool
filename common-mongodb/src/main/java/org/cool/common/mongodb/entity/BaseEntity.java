@@ -1,7 +1,9 @@
-package org.cool.common.entity;
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
+package org.cool.common.mongodb.entity;
 
 import lombok.Data;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 

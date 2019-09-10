@@ -1,17 +1,12 @@
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
 package org.cool.util;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- * 可以控制Map是否允许空value
- *
- * @Auther: zhaojl@hshbao.com
- * @Date: 2018/11/16
- * @Description:
- * @Version: 1.0
- */
 public class MapBuilder<K, V> {
     private Map<K, V> map;
     private boolean ignoreNullValue = false;

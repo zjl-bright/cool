@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
 package org.cool.util;
 
 import com.google.common.base.Splitter;
@@ -8,12 +11,6 @@ import com.google.common.collect.Iterables;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-/**
- * @Auther: zhaojl@hshbao.com
- * @Date: 2018/11/16
- * @Description:
- * @Version: 1.0
- */
 public class NameValidator {
     private static final Pattern pattern = Pattern.compile("([a-z]|[A-Z]|[0-9]|[\\u4e00-\\u9fa5]|_)+");
     private static final Pattern digits = Pattern.compile("[0-9]+");

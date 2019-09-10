@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
 package org.cool.common.utils;
 
 import lombok.extern.slf4j.Slf4j;
@@ -7,12 +10,6 @@ import org.springframework.http.HttpHeaders;
 
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * @Auther: zhaojl@hshbao.com
- * @Date: 2018/11/28
- * @Description:
- * @Version: 1.0
- */
 @Slf4j
 public class RespHelper {
 

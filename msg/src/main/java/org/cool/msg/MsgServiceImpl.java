@@ -1,15 +1,15 @@
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
 package org.cool.msg;
 
-import freemarker.template.utility.StringUtil;
 import org.cool.msg.interceptor.*;
 import org.cool.msg.model.Message;
 import org.cool.msg.enums.MsgChannel;
 import org.cool.msg.exception.MsgException;
 import lombok.extern.slf4j.Slf4j;
 import org.cool.msg.util.TemplateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 

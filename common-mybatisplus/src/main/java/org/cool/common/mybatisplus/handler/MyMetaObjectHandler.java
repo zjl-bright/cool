@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2019. zjl. All rights reserved.
+ */
 //package org.cool.common.handler;
 //
 //import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
@@ -5,13 +8,7 @@
 //import org.springframework.stereotype.Component;
 //
 //import java.time.LocalDateTime;
-//
-///**
-// * @Auther: zhaojl@hshbao.com
-// * @Date: 2018/12/19
-// * @Description:
-// * @Version: 1.0
-// */
+
 //@Component
 //public class MyMetaObjectHandler implements MetaObjectHandler {
 //
