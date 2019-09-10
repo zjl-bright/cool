@@ -2,10 +2,11 @@ package org.cool.common.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-public class BaseEntity {
+public class BaseEntity implements Serializable {
     /**
      * 状态(-1, 0, 1)
      */
