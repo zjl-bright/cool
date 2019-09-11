@@ -16,10 +16,12 @@ import java.util.List;
 @Component
 public class SmsValidatorHandlerInterceptor implements MsgValidatorHandlerInterceptor {
 
+    @Override
     public MsgChannel getMsgChannel(){
         return MsgChannel.Sms;
     }
 
+    @Override
     public void check(Message message) throws MsgException {
         List<String> mobiles = message.getReceiver();
 

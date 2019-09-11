@@ -13,10 +13,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppPushValidatorHandlerInterceptor implements MsgValidatorHandlerInterceptor {
 
+    @Override
     public MsgChannel getMsgChannel(){
         return MsgChannel.AppPush;
     }
 
+    @Override
     public void check(Message message){
 
     }

@@ -35,6 +35,7 @@ public enum LogType {
         return this.value;
     }
 
+    @Override
     public String toString() {
         return this.desc;
     }

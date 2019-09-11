@@ -38,6 +38,7 @@ public enum MsgChannel {
         return this.value;
     }
 
+    @Override
     public String toString() {
         return this.desc;
     }

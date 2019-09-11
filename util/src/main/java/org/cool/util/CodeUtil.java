@@ -79,7 +79,7 @@ public class CodeUtil {
             // 将产生的四个随机数组合在一起。
             randomCode.append(code);
         }
-        Map<String,Object> map  =new HashMap<String,Object>();
+        Map<String,Object> map  =new HashMap(2);
         //存放验证码
         map.put("code", randomCode);
         //存放生成的验证码BufferedImage对象

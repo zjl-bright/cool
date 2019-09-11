@@ -33,7 +33,7 @@ public class GlobalExceptionResolver {
     //拦截主动抛出的已知异常, 打印日志, 200返回, 发送response对象
     @ExceptionHandler(value = {ServiceException.class})
     @ResponseBody
-    public Response ServiceExceptionHandler(ServiceException e){
+    public Response serviceExceptionHandler(ServiceException e){
         if(Objects.nonNull(e.getParams())){
             log.error("ServiceException happened, params : {}, cause by : {}", String.join(",", e.getParams()), Throwables.getStackTraceAsString(e));
         }else{
@@ -46,7 +46,7 @@ public class GlobalExceptionResolver {
 
     //拦截未知的系统异常, 打印日志, 500返回不发送response对象
     @ExceptionHandler(value = {Exception.class})
-    public void ExceptionHandler(Exception e, HttpServletResponse response) throws IOException {
+    public void exceptionHandler(Exception e, HttpServletResponse response) throws IOException {
         log.error("Exception happened, cause by : {}", Throwables.getStackTraceAsString(e));
         response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
     }

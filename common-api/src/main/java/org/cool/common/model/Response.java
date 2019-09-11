@@ -27,6 +27,7 @@ public class Response<T> implements Serializable {
         return this.success;
     }
 
+    @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).add("success", this.success)
                 .add("result", this.result).add("error", this.error).omitNullValues().toString();

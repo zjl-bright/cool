@@ -17,6 +17,7 @@ import java.util.Objects;
 @Component
 public class PreValidatorHandlerInterceptor implements MsgPreValidatorHandlerInterceptor {
 
+    @Override
     public void check(Message message) throws MsgException{
         if (Objects.isNull(message.getChannel())) {
 

@@ -3,10 +3,8 @@
  */
 package org.cool.util;
 
-import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.StringUtils;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -17,9 +15,23 @@ import java.util.Random;
 
 /**
  * 可逆加密
+ *
+ * @author zhaojl@hshbao.com
+ * @date 2019/07/30
  */
 @Slf4j
-public class AESUtil {
+public class AesUtil {
+
+    private static final char[] CHARR = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray();
+
+    private static final Integer LIMIT = 8;
+
+    private static final String PAR1 = ".*[a-z]{1,}.*";
+
+    private static final String PAR2 = ".*[A-Z]{1,}.*";
+
+    private static final String PAR3 = ".*\\d{1,}.*";
+
 
     /**
      * AES加密字符串
@@ -133,49 +145,49 @@ public class AESUtil {
         return BinaryConversionUtil.parseByte2HexStr(encrypt);
     }
 
-    /**
-     * 解析永久用户数
-     * @param foreverCiphertext
-     * @param aesKey
-     * @return
-     */
-    public static Integer analysisForeverNum(String foreverCiphertext, String aesKey){
-        Integer foreverNum = 0;
-        try {
-            if (!Strings.isNullOrEmpty(foreverCiphertext) && foreverCiphertext.length() >= 2){
-                String temporaryPlaintext = getPlaintext(foreverCiphertext, aesKey);
-                String temporaryStartStr = temporaryPlaintext.substring(0, 1);
-                if (StringUtils.pathEquals(temporaryStartStr, "F")){
-                    foreverNum = Integer.valueOf(temporaryPlaintext.substring(1, temporaryPlaintext.length()));
-                }
-            }
-        }catch (Exception e){
-            foreverNum = 0;
-        }
-        return foreverNum;
-    }
+//    /**
+//     * 解析永久用户数
+//     * @param foreverCiphertext
+//     * @param aesKey
+//     * @return
+//     */
+//    public static Integer analysisForeverNum(String foreverCiphertext, String aesKey){
+//        Integer foreverNum = 0;
+//        try {
+//            if (!Strings.isNullOrEmpty(foreverCiphertext) && foreverCiphertext.length() >= 2){
+//                String temporaryPlaintext = getPlaintext(foreverCiphertext, aesKey);
+//                String temporaryStartStr = temporaryPlaintext.substring(0, 1);
+//                if (StringUtils.pathEquals(temporaryStartStr, "F")){
+//                    foreverNum = Integer.valueOf(temporaryPlaintext.substring(1, temporaryPlaintext.length()));
+//                }
+//            }
+//        }catch (Exception e){
+//            foreverNum = 0;
+//        }
+//        return foreverNum;
+//    }
 
-    /**
-     * 解析临时用户
-     * @param TemporaryCiphertext
-     * @param aesKey
-     * @return
-     */
-    public static Integer analysisTemporaryNum(String TemporaryCiphertext, String aesKey){
-        Integer temporaryNum = 0;
-        try {
-            if (!Strings.isNullOrEmpty(TemporaryCiphertext) && TemporaryCiphertext.length() >= 2){
-                String temporaryPlaintext = getPlaintext(TemporaryCiphertext, aesKey);
-                String temporaryStartStr = temporaryPlaintext.substring(0, 1);
-                if (StringUtils.pathEquals(temporaryStartStr, "T")){
-                    temporaryNum = Integer.valueOf(temporaryPlaintext.substring(1, temporaryPlaintext.length()));
-                }
-            }
-        }catch (Exception e){
-            temporaryNum = 0;
-        }
-        return temporaryNum;
-    }
+//    /**
+//     * 解析临时用户
+//     * @param temporaryCiphertext
+//     * @param aesKey
+//     * @return
+//     */
+//    public static Integer analysisTemporaryNum(String temporaryCiphertext, String aesKey){
+//        Integer temporaryNum = 0;
+//        try {
+//            if (!Strings.isNullOrEmpty(temporaryCiphertext) && temporaryCiphertext.length() >= 2){
+//                String temporaryPlaintext = getPlaintext(temporaryCiphertext, aesKey);
+//                String temporaryStartStr = temporaryPlaintext.substring(0, 1);
+//                if (StringUtils.pathEquals(temporaryStartStr, "T")){
+//                    temporaryNum = Integer.valueOf(temporaryPlaintext.substring(1, temporaryPlaintext.length()));
+//                }
+//            }
+//        }catch (Exception e){
+//            temporaryNum = 0;
+//        }
+//        return temporaryNum;
+//    }
 
 //    /**
 //     * 解析截止日期
@@ -213,14 +225,13 @@ public class AESUtil {
 //    }
 
     public static String makeRandomPassword(){
-        char charr[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray();
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
-        for (int x = 0; x < 8; ++x) {
-            sb.append(charr[random.nextInt(charr.length)]);
+        for (int x = 0; x < LIMIT; ++x) {
+            sb.append(CHARR[random.nextInt(CHARR.length)]);
         }
         String randomPassword = sb.toString();
-        if (randomPassword.matches(".*[a-z]{1,}.*") && randomPassword.matches(".*[A-Z]{1,}.*") && randomPassword.matches(".*\\d{1,}.*") ) {
+        if (randomPassword.matches(PAR1) && randomPassword.matches(PAR2) && randomPassword.matches(PAR3) ) {
             return randomPassword;
         }else{
             randomPassword = makeRandomPassword();
@@ -229,7 +240,7 @@ public class AESUtil {
     }
 
     public static String getEncryptionCode(String realCode,String aesKey){
-        StringBuilder supplementLink =new StringBuilder(AESUtil.makeRandomPassword());
+        StringBuilder supplementLink =new StringBuilder(AesUtil.makeRandomPassword());
         supplementLink.append(getCiphertext(realCode,aesKey));
         return supplementLink.toString();
     }

@@ -16,10 +16,12 @@ import java.util.List;
 @Component
 public class EmailValidatorHandlerInterceptor implements MsgValidatorHandlerInterceptor {
 
+    @Override
     public MsgChannel getMsgChannel(){
         return MsgChannel.Email;
     }
 
+    @Override
     public void check(Message message) {
         List<String> emails = message.getReceiver();
 
