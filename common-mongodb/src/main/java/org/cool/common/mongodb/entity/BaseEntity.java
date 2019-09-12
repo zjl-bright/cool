@@ -4,11 +4,17 @@
 package org.cool.common.mongodb.entity;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 public class BaseEntity implements Serializable {
+
+    @Id
+    private String id;
+
     /**
      * 状态(-1, 0, 1)
      */
