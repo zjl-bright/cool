@@ -58,6 +58,15 @@ public class MsgServiceImpl implements MsgService {
     }
 
     @Override
+    public void initial(List<String> receivers, String title, MsgChannel channel, String templateContent, Map<String, Serializable> context, LocalDateTime createTime, Map<String, Object> parameter) throws MsgException {
+        Message message = new Message();
+        String content = TemplateUtil.render(templateContent, context);
+        message.setReceiver(receivers).setTitle(title).setChannel(channel.value()).setContent(content)
+                .setEventCreateTime(createTime).setStatus(Message.Status.Initial.value()).setParameter(parameter);
+        send(message);
+    }
+
+    @Override
     public void send(Message message) {
 
         MsgChannel msgChannel = MsgChannel.from(message.getChannel());

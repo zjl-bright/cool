@@ -18,5 +18,7 @@ public interface MsgService {
 
     void initial(List<String> receivers, String title, MsgChannel channel, String templateContent, Map<String, Serializable> context, LocalDateTime createTime) throws MsgException;
 
+    void initial(List<String> receivers, String title, MsgChannel channel, String templateContent, Map<String, Serializable> context, LocalDateTime createTime, Map<String, Object> parameter) throws MsgException;
+
     void send(Message msg) throws MsgException;
 }
