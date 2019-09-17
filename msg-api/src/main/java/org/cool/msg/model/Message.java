@@ -39,7 +39,7 @@ public class Message implements Serializable {
     /**
      * 消息参数
      */
-    Map<String, Object> parameter;
+    private Map<String, Object> parameter;
 
     public enum Status {
         Initial(0, "开始消费消息"),
