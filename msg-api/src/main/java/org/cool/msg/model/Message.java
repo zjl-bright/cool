@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Data
@@ -34,6 +35,11 @@ public class Message implements Serializable {
      * 消息发送时间
      */
     private LocalDateTime eventCreateTime;
+
+    /**
+     * 消息参数
+     */
+    Map<String, Object> parameter;
 
     public enum Status {
         Initial(0, "开始消费消息"),
