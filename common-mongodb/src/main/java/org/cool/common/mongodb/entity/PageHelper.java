@@ -13,10 +13,11 @@ import org.springframework.data.mongodb.core.query.Query;
 import java.util.List;
 
 /**
- * Demo class
+ * mongo分页帮助类
  *
- * @author zhaojl@hshbao.com
- * @date 2019-09-12
+ * @Auther: zjl
+ * @Date: 2019-09-30
+ * @Version: 1.0
  */
 public class PageHelper<T extends BaseEntity> {
 

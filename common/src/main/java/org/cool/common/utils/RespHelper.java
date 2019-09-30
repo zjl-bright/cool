@@ -1,12 +1,20 @@
 /*
  * Copyright (c) 2019. zjl. All rights reserved.
  */
+
 package org.cool.common.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.cool.common.exception.ServiceException;
 import org.cool.common.model.Response;
 
+/**
+ * resp帮助类
+ *
+ * @Auther: zjl
+ * @Date: 2019-09-30
+ * @Version: 1.0
+ */
 @Slf4j
 public class RespHelper {
 

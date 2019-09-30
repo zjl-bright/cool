@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019. zjl. All rights reserved.
+ * Copyright (c) 2019~2021. zjl. All rights reserved.
  */
 //package org.cool.common.handler;
 //

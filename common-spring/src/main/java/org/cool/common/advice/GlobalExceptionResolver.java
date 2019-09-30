@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2019. zjl. All rights reserved.
  */
+
 package org.cool.common.advice;
 
 import com.google.common.base.Throwables;
@@ -19,6 +20,13 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * 全局异常捕获
+ *
+ * @Auther: zjl
+ * @Date: 2019-09-30
+ * @Version: 1.0
+ */
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionResolver {

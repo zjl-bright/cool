@@ -1,16 +1,23 @@
 /*
  * Copyright (c) 2019. zjl. All rights reserved.
  */
+
 package org.cool.common.model;
 
 import com.google.common.base.MoreObjects;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
+/**
+ * resp结果包装类
+ *
+ * @Auther: zjl
+ * @Date: 2019-09-30
+ * @Version: 1.0
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

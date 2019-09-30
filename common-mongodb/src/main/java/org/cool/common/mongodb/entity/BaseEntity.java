@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2019. zjl. All rights reserved.
  */
+
 package org.cool.common.mongodb.entity;
 
 import lombok.Getter;
@@ -11,6 +12,13 @@ import org.springframework.data.annotation.Id;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * 领域对象公共属性
+ *
+ * @Auther: zjl
+ * @Date: 2019-09-30
+ * @Version: 1.0
+ */
 @Getter
 @Setter
 @Accessors(chain = true)

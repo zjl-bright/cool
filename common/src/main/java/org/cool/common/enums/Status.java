@@ -1,8 +1,16 @@
 /*
  * Copyright (c) 2019. zjl. All rights reserved.
  */
+
 package org.cool.common.enums;
 
+/**
+ * 数据状态类型
+ *
+ * @Auther: zjl
+ * @Date: 2019-09-30
+ * @Version: 1.0
+ */
 public enum Status {
 
     DELETED("已删除", -1),

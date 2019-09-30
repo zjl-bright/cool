@@ -1,8 +1,16 @@
 /*
  * Copyright (c) 2019. zjl. All rights reserved.
  */
+
 package org.cool.common.exception;
 
+/**
+ * 业务异常
+ *
+ * @Auther: zjl
+ * @Date: 2019-09-30
+ * @Version: 1.0
+ */
 public class ServiceException extends RuntimeException {
 
     private int status = 500;
