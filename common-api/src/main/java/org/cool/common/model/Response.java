@@ -5,9 +5,15 @@ package org.cool.common.model;
 
 import com.google.common.base.MoreObjects;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
+@Accessors(chain = true)
 public class Response<T> implements Serializable {
 
     private static final long serialVersionUID = -750644833749014619L;

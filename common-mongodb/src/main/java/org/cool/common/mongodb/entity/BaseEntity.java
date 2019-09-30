@@ -3,13 +3,17 @@
  */
 package org.cool.common.mongodb.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@Accessors(chain = true)
 public class BaseEntity implements Serializable {
 
     @Id

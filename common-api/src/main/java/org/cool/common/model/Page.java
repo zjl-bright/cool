@@ -4,9 +4,8 @@
 
 package org.cool.common.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +16,9 @@ import java.util.List;
  * @author zhaojl@hshbao.com
  * @date 2019-09-12
  */
-@Data
+@Getter
+@Setter
+@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Page<T> {

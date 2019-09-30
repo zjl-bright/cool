@@ -4,6 +4,8 @@
 package org.cool.msg.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -12,7 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 public class Message implements Serializable {
 
