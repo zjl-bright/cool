@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019. zjl. All rights reserved.
  */
-package org.cool.common.utils;
+package org.cool.common.util;
 
 import org.cool.common.model.BaseUser;
 

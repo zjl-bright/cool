@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019. zjl. All rights reserved.
  */
-package org.cool.common.advices;
+package org.cool.common.advice;
 
 import com.google.common.base.Throwables;
 import lombok.extern.slf4j.Slf4j;

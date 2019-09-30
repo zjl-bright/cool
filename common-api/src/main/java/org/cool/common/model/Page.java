@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PageResult<T> {
+public class Page<T> {
 
     /**
      * 页码，从1开始
@@ -45,4 +46,8 @@ public class PageResult<T> {
      * 数据
      */
     private List<T> data;
+
+    public static <T> Page<T> empty(){
+        return new Page(0, 0, Collections.emptyList());
+    }
 }

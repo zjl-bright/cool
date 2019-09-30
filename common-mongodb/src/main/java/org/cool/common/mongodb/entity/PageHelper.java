@@ -4,7 +4,7 @@
 
 package org.cool.common.mongodb.entity;
 
-import org.cool.common.model.PageResult;
+import org.cool.common.model.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -34,7 +34,7 @@ public class PageHelper<T extends BaseEntity> {
     }
 
 
-    public PageResult<T> page(Criteria criteria, Integer pageSize, Integer pageNum){
+    public Page<T> page(Criteria criteria, Integer pageSize, Integer pageNum){
         if (pageNum <= 0) {
             pageNum = 1;
         }
@@ -42,18 +42,18 @@ public class PageHelper<T extends BaseEntity> {
         Query query = Query.query(criteria).skip(skip).limit(pageSize);
         List<T> list = mongoTemplate.find(query, tClass);
 
-        return new PageResult(pageNum, pageSize, list);
+        return new Page(pageNum, pageSize, list);
 
     }
 
-    public PageResult<T> page(Criteria criteria, Sort sort, Integer pageSize, Integer pageNum){
+    public Page<T> page(Criteria criteria, Sort sort, Integer pageSize, Integer pageNum){
         if (pageNum <= 0) {
             pageNum = 1;
         }
         int skip = pageSize * (pageNum - 1);
         Query query = Query.query(criteria).with(sort).skip(skip).limit(pageSize);
         List<T> list = mongoTemplate.find(query, tClass);
-        return new PageResult(pageNum, pageSize, list);
+        return new Page(pageNum, pageSize, list);
 
     }
 

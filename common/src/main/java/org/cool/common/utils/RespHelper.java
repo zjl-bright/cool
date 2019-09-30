@@ -6,9 +6,6 @@ package org.cool.common.utils;
 import lombok.extern.slf4j.Slf4j;
 import org.cool.common.exception.ServiceException;
 import org.cool.common.model.Response;
-import org.springframework.http.HttpHeaders;
-
-import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 public class RespHelper {
@@ -25,9 +22,5 @@ public class RespHelper {
         } else {
             throw new ServiceException(resp.getError());
         }
-    }
-
-    public static void login(Long userId, HttpServletResponse resp) {
-        resp.addHeader(HttpHeaders.AUTHORIZATION, userId.toString());
     }
 }
