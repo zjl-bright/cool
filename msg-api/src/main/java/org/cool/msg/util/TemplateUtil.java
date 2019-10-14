@@ -3,10 +3,9 @@
  */
 package org.cool.msg.util;
 
-import com.google.common.base.Strings;
-
 import java.io.Serializable;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,7 +38,7 @@ public class TemplateUtil {
      * @return
      */
     private static String trim(String str) {
-        if (!Strings.isNullOrEmpty(str) && str.length() > 1) {
+        if(Objects.nonNull(str) && !str.isBlank() && str.length() > 1){
             str = str.substring(1, str.length() - 1);
         }
         return str;

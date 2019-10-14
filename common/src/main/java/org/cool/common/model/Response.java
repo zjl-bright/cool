@@ -4,7 +4,6 @@
 
 package org.cool.common.model;
 
-import com.google.common.base.MoreObjects;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -38,12 +37,6 @@ public class Response<T> implements Serializable {
 
     public boolean isSuccess() {
         return this.success;
-    }
-
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this).add("success", this.success)
-                .add("result", this.result).add("error", this.error).omitNullValues().toString();
     }
 
     public static <T> Response<T> ok(T data) {
