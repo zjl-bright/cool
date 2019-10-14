@@ -50,10 +50,7 @@ public class GlobalExceptionResolver {
         Locale locale = new Locale("zh", "CN");
         String message = messageSource.getMessage(e.getMessage(), null, e.getMessage(), locale);
 
-        Response resp = new Response();
-        resp.setSuccess(false);
-        resp.setError(message);
-        return resp;
+        return Response.fail(message);
     }
 
     //拦截未知的系统异常, 打印日志, 500返回不发送response对象

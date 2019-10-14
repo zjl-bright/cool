@@ -57,10 +57,10 @@ public class Response<T> implements Serializable {
         return ok(null);
     }
 
-//    public static Response fail(String error) {
-//        Response resp = new Response();
-//        resp.setSuccess(false);
-//        resp.setError(error);
-//        return resp;
-//    }
+    public static Response fail(String error) {
+        Response resp = new Response();
+        resp.setSuccess(false);
+        resp.setError(error);
+        return resp;
+    }
 }
