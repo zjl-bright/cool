@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.cool.common.model.BaseUser;
+import org.cool.mybatisplus.BaseUser;
 
 import java.time.LocalDateTime;
 

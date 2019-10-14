@@ -2,9 +2,10 @@
  * Copyright (c) 2019. zjl. All rights reserved.
  */
 
-package org.cool.mongodb;
+package org.cool.mongodb.helper;
 
 import org.cool.common.model.Page;
+import org.cool.mongodb.entity.BaseEntity;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;

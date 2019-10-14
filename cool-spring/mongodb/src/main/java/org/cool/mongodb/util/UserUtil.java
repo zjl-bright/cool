@@ -2,9 +2,9 @@
  * Copyright (c) 2019. zjl. All rights reserved.
  */
 
-package org.cool.web.util;
+package org.cool.mongodb.util;
 
-import org.cool.common.model.BaseUser;
+import org.cool.mongodb.BaseUser;
 
 /**
  * 用户工具类

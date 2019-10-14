@@ -2,7 +2,7 @@
  * Copyright (c) 2019. zjl. All rights reserved.
  */
 
-package org.cool.common.model;
+package org.cool.mybatisplus;
 
 import java.io.Serializable;
 
@@ -15,5 +15,5 @@ import java.io.Serializable;
  */
 public interface BaseUser extends Serializable {
 
-    String getId();
+    Long getId();
 }

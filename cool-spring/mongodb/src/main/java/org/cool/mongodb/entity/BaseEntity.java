@@ -2,7 +2,7 @@
  * Copyright (c) 2019. zjl. All rights reserved.
  */
 
-package org.cool.mongodb;
+package org.cool.mongodb.entity;
 
 import lombok.Getter;
 import lombok.Setter;
