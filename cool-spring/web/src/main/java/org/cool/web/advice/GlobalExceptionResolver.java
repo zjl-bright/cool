@@ -4,10 +4,10 @@
 
 package org.cool.web.advice;
 
-import com.google.common.base.Throwables;
 import lombok.extern.slf4j.Slf4j;
 import org.cool.common.exception.ServiceException;
 import org.cool.common.model.Response;
+import org.cool.common.utils.Throwables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
