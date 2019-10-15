@@ -26,7 +26,7 @@ public class PageHelper<T extends BaseEntity> {
 
     private Class<T> tClass;
 
-    public PageHelper(MongoTemplate mongoTemplate, Class<T> tClass){
+    private PageHelper(MongoTemplate mongoTemplate, Class<T> tClass){
         this.mongoTemplate = mongoTemplate;
         this.tClass = tClass;
     }
