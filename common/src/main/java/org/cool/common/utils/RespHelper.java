@@ -28,7 +28,7 @@ public class RespHelper {
         if (resp.isSuccess()) {
             return resp.getResult();
         } else {
-            throw new ServiceException(resp.getError());
+            throw new ServiceException(resp.getCode(), resp.getMessage());
         }
     }
 }

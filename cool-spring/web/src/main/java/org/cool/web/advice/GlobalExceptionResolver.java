@@ -5,18 +5,15 @@
 package org.cool.web.advice;
 
 import lombok.extern.slf4j.Slf4j;
+import org.cool.common.enums.ResponseCode;
 import org.cool.common.exception.ServiceException;
 import org.cool.common.model.Response;
 import org.cool.common.utils.Throwables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -28,7 +25,7 @@ import java.util.Objects;
  * @Version: 1.0
  */
 @Slf4j
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionResolver {
 
     private final MessageSource messageSource;
@@ -40,7 +37,6 @@ public class GlobalExceptionResolver {
 
     //拦截主动抛出的已知异常, 打印日志, 200返回, 发送response对象
     @ExceptionHandler(value = {ServiceException.class})
-    @ResponseBody
     public Response serviceExceptionHandler(ServiceException e){
         if(Objects.nonNull(e.getParams())){
             log.error("ServiceException happened, params : {}, cause by : {}", String.join(",", e.getParams()), Throwables.getStackTraceAsString(e));
@@ -49,14 +45,16 @@ public class GlobalExceptionResolver {
         }
         Locale locale = new Locale("zh", "CN");
         String message = messageSource.getMessage(e.getMessage(), null, e.getMessage(), locale);
-
+        if(Objects.equals(ResponseCode.TIP_ERROR.code(), e.getStatus())){
+            return Response.fail401();
+        }
         return Response.fail(message);
     }
 
-    //拦截未知的系统异常, 打印日志, 500返回不发送response对象
+    //拦截未知的系统异常, 打印日志, 500返回前端调用容错页面
     @ExceptionHandler(value = {Exception.class})
-    public void exceptionHandler(Exception e, HttpServletResponse response) throws IOException {
+    public Response exceptionHandler(Exception e){
         log.error("Exception happened, cause by : {}", Throwables.getStackTraceAsString(e));
-        response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
+        return Response.fail500();
     }
 }

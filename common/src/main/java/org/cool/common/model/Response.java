@@ -7,6 +7,7 @@ package org.cool.common.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.cool.common.enums.ResponseCode;
 
 import java.io.Serializable;
 
@@ -24,36 +25,46 @@ public class Response<T> implements Serializable {
 
     private static final long serialVersionUID = -750644833749014619L;
 
-    //是否成功
-    private boolean success;
+    //状态码
+    private Integer code;
+
+    //消息
+    private String message;
 
     //返回结果集
     private T result;
 
-    //错误提示
-    private String error;
+    //是否成功
+    private boolean success;
 
     public Response() {}
+
+    private Response(ResponseCode responseCode) {
+        this.code = responseCode.code();
+        this.message = responseCode.message();
+    }
 
     public boolean isSuccess() {
         return this.success;
     }
 
-    public static <T> Response<T> ok(T data) {
-        Response<T> resp = new Response<T>();
-        resp.setSuccess(true);
-        resp.setResult(data);
-        return resp;
-    }
-
     public static Response ok() {
-        return ok(null);
+        return new Response(ResponseCode.SUCCESS).setSuccess(true);
     }
 
-    public static Response fail(String error) {
-        Response resp = new Response();
-        resp.setSuccess(false);
-        resp.setError(error);
-        return resp;
+    public static <T> Response<T> ok(T data) {
+        return new Response<T>(ResponseCode.SUCCESS).setResult(data).setSuccess(true);
+    }
+
+    public static Response fail401() {
+        return new Response(ResponseCode.LOST).setSuccess(false);
+    }
+
+    public static Response fail(String message) {
+        return new Response(ResponseCode.TIP_ERROR).setMessage(message).setSuccess(false);
+    }
+
+    public static Response fail500() {
+        return new Response(ResponseCode.UNKNOWN_ERROR).setSuccess(false);
     }
 }

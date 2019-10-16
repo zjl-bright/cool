@@ -13,7 +13,7 @@ package org.cool.common.exception;
  */
 public class ServiceException extends RuntimeException {
 
-    private int status = 500;
+    private Integer status = 406;
 
     private String[] params;
 
@@ -35,15 +35,24 @@ public class ServiceException extends RuntimeException {
         this.params = params;
     }
 
-    public ServiceException(int status, String message, Throwable cause) {
+    public ServiceException(Integer status, String message) {
+        super(message);
+        this.status = status;
+    }
+
+    public ServiceException(Integer status, String message, Throwable cause) {
         super(message, cause);
         this.status = status;
     }
 
-    public ServiceException(int status, String message, Throwable cause, String... params) {
+    public ServiceException(Integer status, String message, Throwable cause, String... params) {
         super(message, cause);
         this.status = status;
         this.params = params;
+    }
+
+    public Integer getStatus(){
+        return status;
     }
 
     public String[] getParams(){
