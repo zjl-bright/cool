@@ -4,11 +4,11 @@
 
 package org.cool.web.advice;
 
+import com.google.common.base.Throwables;
 import lombok.extern.slf4j.Slf4j;
 import org.cool.common.enums.ResponseCode;
 import org.cool.common.exception.ServiceException;
 import org.cool.common.model.Response;
-import org.cool.common.utils.Throwables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -45,8 +45,9 @@ public class GlobalExceptionResolver {
         }
         Locale locale = new Locale("zh", "CN");
         String message = messageSource.getMessage(e.getMessage(), null, e.getMessage(), locale);
-        if(Objects.equals(ResponseCode.TIP_ERROR.code(), e.getStatus())){
-            return Response.fail401();
+        //除了401，其他被ServiceException捕捉到的异常都走406
+        if(Objects.equals(ResponseCode.LOST.code(), e.getStatus())){
+            return Response.fail401(e.getMessage());
         }
         return Response.fail(message);
     }

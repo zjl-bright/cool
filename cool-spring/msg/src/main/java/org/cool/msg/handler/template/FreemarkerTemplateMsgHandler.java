@@ -6,7 +6,6 @@ package org.cool.msg.handler.template;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
-import org.cool.common.utils.Throwables;
 import org.cool.msg.exception.MsgException;
 import org.cool.msg.interceptor.MsgTemplateHandlerInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;

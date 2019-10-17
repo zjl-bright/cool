@@ -6,7 +6,7 @@ public enum ResponseCode {
 
     LOST(401, "用户未登录"),
 
-    TIP_ERROR(406, "提示内容"),
+    TIP_ERROR(406, "请替换为当前场景的提示内容"),
 
     UNKNOWN_ERROR(500, "未知错误");
 

@@ -4,6 +4,7 @@
 
 package org.cool.common.model;
 
+import com.google.common.base.Strings;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -56,15 +57,24 @@ public class Response<T> implements Serializable {
         return new Response<T>(ResponseCode.SUCCESS).setResult(data).setSuccess(true);
     }
 
-    public static Response fail401() {
-        return new Response(ResponseCode.LOST).setSuccess(false);
+    public static Response fail401(String message) {
+        return code(ResponseCode.LOST, message);
     }
 
     public static Response fail(String message) {
-        return new Response(ResponseCode.TIP_ERROR).setMessage(message).setSuccess(false);
+        return code(ResponseCode.TIP_ERROR, message);
     }
 
     public static Response fail500() {
-        return new Response(ResponseCode.UNKNOWN_ERROR).setSuccess(false);
+        return code(ResponseCode.UNKNOWN_ERROR, null);
+    }
+
+    private static Response code(ResponseCode responseCode, String message){
+        Response resp = new Response(responseCode).setSuccess(false);
+        if(Strings.isNullOrEmpty(message)){
+            return resp;
+        }else{
+            return resp.setMessage(message);
+        }
     }
 }
