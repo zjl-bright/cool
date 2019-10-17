@@ -3,6 +3,7 @@
  */
 package org.cool.msg.handler.template;
 
+import com.google.common.base.Throwables;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
