@@ -47,7 +47,7 @@ public class GlobalExceptionResolver {
         String message = messageSource.getMessage(e.getMessage(), null, e.getMessage(), locale);
         //除了401，其他被ServiceException捕捉到的异常都走406
         if(Objects.equals(ResponseCode.LOST.code(), e.getStatus())){
-            return Response.fail401(e.getMessage());
+            return Response.fail401(message);
         }
         return Response.fail(message);
     }

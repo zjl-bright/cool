@@ -69,6 +69,10 @@ public class Response<T> implements Serializable {
         return code(ResponseCode.UNKNOWN_ERROR, null);
     }
 
+    public static Response fail500(String message) {
+        return code(ResponseCode.UNKNOWN_ERROR, message);
+    }
+
     private static Response code(ResponseCode responseCode, String message){
         Response resp = new Response(responseCode).setSuccess(false);
         if(Strings.isNullOrEmpty(message)){
