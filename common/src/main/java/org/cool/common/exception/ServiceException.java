@@ -58,4 +58,9 @@ public class ServiceException extends RuntimeException {
     public String[] getParams(){
         return params;
     }
+
+    @Override
+    public Throwable fillInStackTrace() {
+        return this;
+    }
 }
