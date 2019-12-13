@@ -4,13 +4,13 @@
 
 package org.cool.common.model;
 
-import com.google.common.base.Strings;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.cool.common.enums.ResponseCode;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * resp结果包装类
@@ -75,7 +75,7 @@ public class Response<T> implements Serializable {
 
     private static Response code(ResponseCode responseCode, String message){
         Response resp = new Response(responseCode).setSuccess(false);
-        if(Strings.isNullOrEmpty(message)){
+        if(Objects.isNull(message) || message.isBlank()){
             return resp;
         }else{
             return resp.setMessage(message);
