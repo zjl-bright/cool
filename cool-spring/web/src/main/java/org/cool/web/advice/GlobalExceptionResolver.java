@@ -4,7 +4,6 @@
 
 package org.cool.web.advice;
 
-import com.google.common.base.Throwables;
 import lombok.extern.slf4j.Slf4j;
 import org.cool.common.enums.ResponseCode;
 import org.cool.common.exception.ServiceException;

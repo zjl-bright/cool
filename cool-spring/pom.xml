@@ -23,8 +23,7 @@
     </modules>
 
     <properties>
-        <spring-boot-docs-version>2.1.6.RELEASE</spring-boot-docs-version>
-        <spring-cloud-version>Greenwich.SR2</spring-cloud-version>
+        <spring-boot-docs-version>2.2.6.RELEASE</spring-boot-docs-version>
     </properties>
 
     <dependencyManagement>
@@ -33,13 +32,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot-docs-version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
